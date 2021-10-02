@@ -5,10 +5,21 @@
     <title>Drinkage</title>
 </head>
 <body>
-    <div>{{ drink['strDrink'] }}: Serve in: {{ drink.strGlass }}</div>
+    <div class="featured-drink">
+        <div>Random drink</div>
+        <div>Name: {{ random_drink['strDrink'] }}: Serve in: {{ random_drink.strGlass }}</div>
+        <div><img src="{{ random_drink.strDrinkThumb }}" alt="Picture of {{ random_drink.strDrink }}"></div>
+        <ul>
+            {% for item in random_drink.ingredients %}
+            <li>{{ item.ingredient }} - {{ item.amount }}</li>
+            {% endfor%}
+        </ul>
+        <div>{{ random_drink.strInstructions }}</div>
+    </div>
+
     <div>A list of drinks that start with...</div>
-    <div><a href="{{ url_for('list_drinks', letter='a')}}">A</a></div>
-    <div><a href="{{ url_for('list_drinks', letter='m')}}">M</a></div>
-    <div><a href="{{ url_for('list_drinks', letter='o')}}">O</a></div>
+    {% for letter in alphabet %}
+        <div><a href="{{ url_for('list_drinks', letter=letter)}}">{{ letter }}</a></div>
+    {% endfor %}
 </body>
 </html>

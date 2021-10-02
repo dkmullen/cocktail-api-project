@@ -5,7 +5,17 @@
     <title>Details for {{ drink.strName }}</title>
 </head>
 <body>
-    {{ drink }}
+    <div class="featured-drink">
+        <div>Featured drink</div>
+        <div>Name: {{ drink['strDrink'] }}: Serve in: {{ drink.strGlass }}</div>
+        <div><img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}"></div>
+        <ul>
+            {% for item in drink.ingredients %}
+            <li>{{ item.ingredient }} - {{ item.amount }}</li>
+            {% endfor%}
+        </ul>
+        <div>{{ drink.strInstructions }}</div>
+    </div>
     <a href="{{ url_for('home') }}">Home</a>
 </body>
 </html>
