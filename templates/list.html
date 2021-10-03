@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Drink List</title>
-</head>
-<body>
+{% include "header.html" %}
+
+
+<div class="drink-list">
 {% for drink in drinks %}
-<div>
-    <a href="{{ url_for('show_details', drink_id=drink.idDrink) }}">{{ drink['strDrink'] }}</a>: Serve in: {{ drink.strGlass }}
-</div>
+    <div class="drink-list-item">
+        <img src="{{ drink.strDrinkThumb }}/preview" alt="Thumbnail of {{ drink.name }}">
+        <a href="{{ url_for('show_details', drink_id=drink.idDrink) }}">
+            {{ drink['strDrink'] }}
+        </a>:
+        <span class="drink-list-ingredients">Need: {{ drink.ingredients_str }}</span>
+    </div>
 {% endfor %}
+</div>
+
 <div><a href="{{ url_for('home') }}">Home</a></div>
-</body>
-</html>
+{% include "footer.html" %}

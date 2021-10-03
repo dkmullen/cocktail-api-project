@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Details for {{ drink.strName }}</title>
-</head>
-<body>
-    <div class="featured-drink">
-        <div>Featured drink</div>
-        <div>Name: {{ drink['strDrink'] }}: Serve in: {{ drink.strGlass }}</div>
-        <div><img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}"></div>
+{% include "header.html" %}
+<div class="featured-drink">
+    <h1>{{ drink['strDrink'] }}</h1>
+    <div>
+        <img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}">
+    </div>
+    <div class="info">
         <ul>
             {% for item in drink.ingredients %}
-            <li>{{ item.ingredient }} - {{ item.amount }}</li>
+            <li>{{ item.amount }} {{ item.ingredient }}</li>
             {% endfor%}
         </ul>
-        <div>{{ drink.strInstructions }}</div>
+    <div>{{ drink.strInstructions }}</div>
+    <div>Serve in: {{ drink.strGlass }}</div>
     </div>
-    <a href="{{ url_for('home') }}">Home</a>
-</body>
-</html>
+</div>
+<a href="{{ url_for('home') }}">Home</a>
+{% include "footer.html" %}

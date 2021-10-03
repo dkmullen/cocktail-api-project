@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Drinkage</title>
-</head>
-<body>
-    <div class="featured-drink">
-        <div>Random drink</div>
-        <div>Name: {{ random_drink['strDrink'] }}: Serve in: {{ random_drink.strGlass }}</div>
-        <div><img src="{{ random_drink.strDrinkThumb }}" alt="Picture of {{ random_drink.strDrink }}"></div>
+{% include "header.html" %}
+<div class="featured-drink">
+    <h1>{{ drink['strDrink'] }}</h1>
+    <p class="tagline">A drink chosen (at random) especially for you</p>
+    <div>
+        <img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}">
+    </div>
+    <div class="info">
         <ul>
-            {% for item in random_drink.ingredients %}
-            <li>{{ item.ingredient }} - {{ item.amount }}</li>
+            {% for item in drink.ingredients %}
+            <li>{{ item.amount }} {{ item.ingredient }}</li>
             {% endfor%}
         </ul>
-        <div>{{ random_drink.strInstructions }}</div>
+    <div>{{ drink.strInstructions }}</div>
+    <div>Serve in: {{ drink.strGlass }}</div>
     </div>
-
-    <div>A list of drinks that start with...</div>
-    {% for letter in alphabet %}
-        <div><a href="{{ url_for('list_drinks', letter=letter)}}">{{ letter }}</a></div>
-    {% endfor %}
-</body>
-</html>
+</div>
+{% include "footer.html" %}

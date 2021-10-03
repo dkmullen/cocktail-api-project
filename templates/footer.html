@@ -1,0 +1,20 @@
+<footer>
+    <p>Find drinks that start with...</p>
+    <div id="letter-bar">
+        {% for letter in alphabet %}
+        <a href="{{ url_for('list_drinks', letter=letter)}}"
+             aria-label="{{ letter }}">
+            <div class="letter-square">
+                <span class="letter">{{ letter }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="button-row">
+        <a href="{{ url_for('home') }}">
+            <button>Random Drink</button>
+        </a>
+    </div>
+</footer>
+</body>
+</html>
