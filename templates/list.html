@@ -3,15 +3,20 @@
 
 <div class="drink-list">
 {% for drink in drinks %}
-    <div class="drink-list-item">
-        <img src="{{ drink.strDrinkThumb }}/preview" alt="Thumbnail of {{ drink.name }}">
-        <a href="{{ url_for('show_details', drink_id=drink.idDrink) }}">
-            {{ drink['strDrink'] }}
-        </a>:
-        <span class="drink-list-ingredients">Need: {{ drink.ingredients_str }}</span>
-    </div>
+    <a href="{{ url_for('show_details', drink_id=drink.idDrink) }}">
+        <div class="drink-list-item">
+            <div>
+                <img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.name }}">
+            </div>
+            <div class="drink-list-label">
+                <div class="drink-list-name">
+                        {{ drink['strDrink'] }}
+                </div>
+                <div class="drink-list-ingredients">Ingredients: {{ drink.ingredients_str }}</div>
+            </div>
+        </div>
+    </a>
 {% endfor %}
 </div>
 
-<div><a href="{{ url_for('home') }}">Home</a></div>
 {% include "footer.html" %}
