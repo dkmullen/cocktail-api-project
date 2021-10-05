@@ -1,5 +1,5 @@
 {% include "header.html" %}
-<div class="featured-drink">
+<div class="details-drink">
     <h1>{{ drink['strDrink'] }}</h1>
     <div>
         <img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}">
@@ -10,7 +10,7 @@
             <li>{{ item.amount }} {{ item.ingredient }}</li>
             {% endfor%}
         </ul>
-    <div>{{ drink.strInstructions }}</div>
+    <div class="instructions">{{ drink.strInstructions }}</div>
     <div>Serve in: {{ drink.strGlass }}</div>
     </div>
 </div>

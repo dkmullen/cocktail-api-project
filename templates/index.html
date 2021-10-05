@@ -1,18 +1,13 @@
 {% include "header.html" %}
 <div class="featured-drink">
-    <h1>{{ drink['strDrink'] }}</h1>
-    <p class="tagline">A drink chosen (at random) especially for you</p>
-    <div>
-        <img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}">
-    </div>
-    <div class="info">
-        <ul>
-            {% for item in drink.ingredients %}
-            <li>{{ item.amount }} {{ item.ingredient }}</li>
-            {% endfor%}
-        </ul>
-    <div>{{ drink.strInstructions }}</div>
-    <div>Serve in: {{ drink.strGlass }}</div>
-    </div>
+    <a href="{{ url_for('show_details', drink_id=drink.idDrink) }}">
+        <h1>{{ drink['strDrink'] }}</h1>
+        <p class="tagline">A drink chosen (at random) especially for you</p>
+        <div>
+            <img src="{{ drink.strDrinkThumb }}" alt="Picture of {{ drink.strDrink }}">
+        </div>
+        <div class="subtle">Click for details</div>
+    </a>
 </div>
+
 {% include "footer.html" %}
