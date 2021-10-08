@@ -8,6 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <title>Lovely Beverages</title>
+  <title>A Lovely Beverage</title>
 </head>
 <body>
+<header>
+  <a href="{{ url_for('home')}}">
+    <img src="{{ url_for('static', filename='images/logo-combined.png') }}" alt="beverage logo" class="logo">
+  </a>
+</header>
