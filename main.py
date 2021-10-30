@@ -1,7 +1,24 @@
 from flask import Flask, render_template, redirect, url_for, request
+from flask_sqlalchemy import SQLAlchemy
 import requests
 
 app = Flask(__name__)
+
+# Using SQLAlchemy - set up the DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cached-drinks.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+# Model the records
+class DrinksByLetter(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    letter = db.Column(db.String(5), unique=True, nullable=False)
+    drink_list = db.Column(db.String)
+
+
+# Create the DB
+db.create_all()
 
 base_url = "https://www.thecocktaildb.com/api/json/v1/1/"
 search_url = f"{base_url}search.php?"
@@ -79,10 +96,12 @@ def home():
 @app.route("/list/<letter>")
 def list_drinks(letter):
     drink_list = get_me_a_drink(search_url, f"f={letter}")
+    new_list = DrinksByLetter(letter=letter, drink_list=repr(drink_list))
+    db.session.add(new_list)
+    db.session.commit()
     for drink in drink_list:
         ingredients = filter_items("strIngredient", drink)
         ingredients = clean_null_terms(ingredients)
-        print(ingredients)
         drink['ingredients_str'] = make_ingredients_string(ingredients)
     return render_template('list.html', drinks=drink_list, alphabet=alphabet)
 
