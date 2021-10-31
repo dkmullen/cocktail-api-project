@@ -95,10 +95,14 @@ def home():
 
 @app.route("/list/<letter>")
 def list_drinks(letter):
-    drink_list = get_me_a_drink(search_url, f"f={letter}")
-    new_list = DrinksByLetter(letter=letter, drink_list=repr(drink_list))
-    db.session.add(new_list)
-    db.session.commit()
+    letter_from_db = db.session.query(DrinksByLetter).filter(DrinksByLetter.letter == letter).first()
+    if letter_from_db:
+        drink_list = eval(letter_from_db.drink_list)
+    else:
+        drink_list = get_me_a_drink(search_url, f"f={letter}")
+        new_list = DrinksByLetter(letter=letter, drink_list=str(drink_list))
+        db.session.add(new_list)
+        db.session.commit()
     for drink in drink_list:
         ingredients = filter_items("strIngredient", drink)
         ingredients = clean_null_terms(ingredients)
